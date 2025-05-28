@@ -93,7 +93,7 @@ export default function HeroSection(_props: HeroSectionProps) {
                         <Play className="h-3 w-3 sm:h-4 sm:w-4" />
                         Watch Trailer
                       </Button>
-                      <Link to={`/movie/${movie.id}`}>
+                      <Link to={`/practise-app/movie/${movie.id}`}>
                         <Button size="sm" variant="outline" className="gap-1 sm:gap-2 border-white/50 hover:bg-white/10 text-xs sm:text-sm">
                           <Info className="h-3 w-3 sm:h-4 sm:w-4" />
                           More Info
