@@ -15,7 +15,7 @@ export default function SearchBox() {
   return (
     <>
       {!isOpen ? (
-        <Button variant="ghost" size="icon" onClick={() => setIsOpen(true)}>
+        <Button variant="ghost" size="icon" onClick={() => setIsOpen(true)} className="h-9 w-9">
           <Search className="h-5 w-5" />
         </Button>
       ) : (
@@ -29,7 +29,7 @@ export default function SearchBox() {
               placeholder="Search movies..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-72 h-9 px-3 bg-transparent border-none focus:outline-none text-sm"
+              className="w-32 xs:w-48 sm:w-64 md:w-72 h-9 px-3 bg-transparent border-none focus:outline-none text-sm"
               autoFocus
             />
             <Button 

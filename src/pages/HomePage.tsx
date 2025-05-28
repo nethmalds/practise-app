@@ -8,14 +8,14 @@ export default function HomePage() {
   const heroMovie = featuredMovies[0];
 
   return (
-    <div>
-      <div id ="hero">
+    <div className="w-full">
+      <div id="hero">
         <HeroSection movie={heroMovie} />
       </div>
-      <div id="tranding" className="w-full flex justify-center">
+      <div id="tranding" className="w-full">
         <TrendingCarousel movies={[...popularMovies, ...featuredMovies].slice(0, 6)} />
       </div>
-        <div className="w-full flex flex-col items-center">
+      <div className="w-full">
         <MovieList title="Featured Movies" movies={featuredMovies} />
         <div id="popular-now">
           <MovieList title="Popular Now" movies={popularMovies} />

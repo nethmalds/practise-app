@@ -2,28 +2,38 @@ import { Link } from "react-router-dom";
 import { NavigationMenu, NavigationMenuList, NavigationMenuItem, NavigationMenuLink, NavigationMenuContent, NavigationMenuTrigger } from "@/components/ui/navigation-menu";
 import SearchBox from "@/components/SearchBox";
 import ThemeSwitcher from "@/components/ThemeSwitcher";
+import { useState } from "react";
+import { Menu, X } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
-export default function Navbar() {  return (
-    <header className="sticky top-0 z-40 w-full border-b bg-background">
-      <div className="container mx-auto flex h-16 items-center justify-between space-x-4 sm:space-x-0 max-w-7xl">
-        <div className="flex gap-6 md:gap-10">
+export default function Navbar() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  return (
+    <header className="fixed top-0 z-40 w-full border-b bg-background">
+      <div className="container mx-auto flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8 max-w-7xl">
+        <div className="flex items-center">
           <Link 
-          to="/" 
-          className="flex items-center space-x-2"          
-          onClick ={(e) => {
-            e.preventDefault();
-            const heroElement = document.getElementById('hero');
-            if (heroElement) {
-              const headerHeight = document.querySelector('header')?.offsetHeight || 0;
-              window.scrollTo({
-                top: heroElement.offsetTop - headerHeight,
-                behavior: 'smooth'
-              });
-            }
-          }}
+            to="/" 
+            className="flex items-center space-x-2"          
+            onClick ={(e) => {
+              e.preventDefault();
+              const heroElement = document.getElementById('hero');
+              if (heroElement) {
+                const headerHeight = document.querySelector('header')?.offsetHeight || 0;
+                window.scrollTo({
+                  top: heroElement.offsetTop - headerHeight,
+                  behavior: 'smooth'
+                });
+              }
+            }}
           >
-            <span className="hidden font-bold sm:inline-block text-2xl">CINEMAX</span>
+            <span className="font-bold text-xl sm:text-2xl">CINEMAX</span>
           </Link>
+        </div>
+
+        {/* Desktop Navigation */}
+        <div className="hidden md:flex items-center space-x-6">
           <NavigationMenu>
             <NavigationMenuList>
               <NavigationMenuItem>
@@ -51,7 +61,7 @@ export default function Navbar() {  return (
                             New Releases
                           </div>
                           <p className="text-sm leading-tight text-white/90">
-                            Check out the latest blockbusters
+                            Discover the latest and greatest movies just released
                           </p>
                         </Link>
                       </NavigationMenuLink>
@@ -112,13 +122,71 @@ export default function Navbar() {  return (
               </NavigationMenuItem>
             </NavigationMenuList>
           </NavigationMenu>
-        </div>        
-        <div className="flex items-center space-x-4">
-          <ThemeSwitcher />
+          <div className="flex items-center space-x-2">
+            <SearchBox />
+            <ThemeSwitcher />
+          </div>
+        </div>
+
+        {/* Mobile Navigation */}
+        <div className="flex items-center space-x-2 md:hidden">
           <SearchBox />
-         {/*  <Button>Sign In</Button> */}
+          <ThemeSwitcher />
+          <Button variant="ghost" size="icon" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+            {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </Button>
         </div>
       </div>
+
+      {/* Mobile Menu */}
+      {mobileMenuOpen && (
+        <div className="md:hidden bg-background border-t p-4 animate-in slide-in-from-top duration-300">
+          <nav className="flex flex-col space-y-4">
+            <Link 
+              to="/"
+              className="px-3 py-2 text-sm font-medium rounded-md hover:bg-accent hover:text-accent-foreground"
+              onClick={(e) => {
+                e.preventDefault();
+                setMobileMenuOpen(false);
+                const heroElement = document.getElementById('hero');
+                if (heroElement) {
+                  const headerHeight = document.querySelector('header')?.offsetHeight || 0;
+                  window.scrollTo({
+                    top: heroElement.offsetTop - headerHeight,
+                    behavior: 'smooth'
+                  });
+                }
+              }}
+            >
+              Home
+            </Link>
+            <Link 
+              to="/tranding"
+              className="px-3 py-2 text-sm font-medium rounded-md hover:bg-accent hover:text-accent-foreground"
+              onClick={(e) => {
+                e.preventDefault();
+                setMobileMenuOpen(false);
+                const trendingElement = document.getElementById('tranding');
+                if (trendingElement) {
+                  const headerHeight = document.querySelector('header')?.offsetHeight || 0;
+                  window.scrollTo({
+                    top: trendingElement.offsetTop - headerHeight,
+                    behavior: 'smooth'
+                  });
+                }
+              }}
+            >
+              Trending
+            </Link>
+            <Link 
+              to="/categories"
+              className="px-3 py-2 text-sm font-medium rounded-md hover:bg-accent hover:text-accent-foreground"
+            >
+              Categories
+            </Link>
+          </nav>
+        </div>
+      )}
     </header>
   );
 }
