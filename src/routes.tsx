@@ -5,15 +5,15 @@ import MovieDetailsPage from "./pages/MovieDetailsPage";
 
 export const router = createBrowserRouter([
   {
-    path: "/",
+    path: "/practise-app/",
     element: <App />,
     children: [
       {
-        path: "/",
+        path: "/practise-app/",
         element: <HomePage />,
       },
       {
-        path: "/movie/:id",
+        path: "/practise-app/movie/:id",
         element: <MovieDetailsPage />,
       },
     ],
