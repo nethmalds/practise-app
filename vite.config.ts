@@ -5,7 +5,7 @@ import tailwindcss from '@tailwindcss/vite'
 
 
 export default defineConfig({
-  base: "/practise-app/",
+  base: "/",
   plugins: [
     react(),
     tailwindcss(),
